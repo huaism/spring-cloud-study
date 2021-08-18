@@ -2,11 +2,11 @@
 测试spring-cloud
 
 1. Nacos Server Startup
-For details about how to download and start Nacos, refer to the Nacos Website.
+  For details about how to download and start Nacos, refer to the Nacos Website.
 After Nacos Server starts, go to http://ip:8848 to view the console (default account name/password is nacos/nacos):
 
 2.sentinel Server Startup
-You can download the latest dashboard JAR file from the Release Page.
+  You can download the latest dashboard JAR file from the Release Page.
 You can also get the latest source code to build your own Sentinel dashboard：
 Download the Dashboard project.
 Run the following command to package the code into a FatJar: mvn clean package

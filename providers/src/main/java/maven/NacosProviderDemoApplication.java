@@ -20,8 +20,8 @@ public class NacosProviderDemoApplication {
         @GetMapping(value = "/echo/{string}")
 //        @SentinelResource("hello")
         public String echo(@PathVariable String string) throws InterruptedException {
-            Thread.sleep(1000L);
-            return "Hello Nacos Discovery " + string;
+//            Thread.sleep(1000L);
+            return "Hello Nacos4 Discovery " + string;
         }
     }
 }

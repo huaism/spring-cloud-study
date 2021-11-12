@@ -1,0 +1,53 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: gateway-server # 应用名称
+  cloud:
+    # 开启网关拉取nacos的服务
+    gateway:
+      discovery:
+        locator:
+          # 是否与服务发现组件进行结合,通过  serviceId 转发到具体的微服务
+          enabled: true                      #默认false，开启后可以通过ip:port/服务名称/接口地址进行服务转发
+          lower-case-service-id: true         # 是否将服务名称转小写
+
+      # 路由规则
+      routes:
+          - id: nacos-gateway-provider      # 路由 ID,唯一,没有固定规则但要求唯一，建议配合服务名
+            uri: lb://nacos-consumer        # 匹配后提供服务的路由地址，lb代表负载均衡
+#            uri: http://localhost:8082
+            predicates:                     # 断言(判断条件)
+              - Path=/echo/**                 # 匹配对应 URL 的请求,将匹配到的请求追加在目标 URI 之后
+    nacos:
+      # 注册中心配置
+      discovery:
+        server-addr: localhost:8848 # nacos 注册中心地址
+#        namespace: 0e883794-4414-4d41-a177-6d335d304e42 # 开发环境  指定 具体的命名空间id
+        #group: DEFAULT_GROUP # 分组 默认分组可以省略
+      # 配置中心配置
+      config:
+        #enabled: false #关闭配置
+        server-addr: localhost:8848 # Nacos 配置中心地址
+
+    # sentinel 配置
+    sentinel:
+      transport:
+        dashboard: localhost:7777
+        port: 8719
+
+    loadbalancer:
+      retry:
+        enabled: true
+
+  sleuth:
+    http:
+      enabled: true
+    sampler:
+      #设置Sleuth的抽样收集概率
+      probability: 0.1
+
+
+  zipkin:
+    base-url: http://localhost:9411

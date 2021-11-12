@@ -1,0 +1,35 @@
+# 服务端口
+server:
+  port: 8082
+
+spring:
+  application:
+    # 服务名
+    name: nacos-consumer
+  cloud:
+    # nacos 配置
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    # sentinel 配置
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:7777
+
+  sleuth:
+    http:
+      enabled: true
+    sampler:
+      #设置Sleuth的抽样收集概率
+      probability: 0.1
+
+
+  zipkin:
+    base-url: http://localhost:9411
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
